@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load django_bootstrap5 %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE|default:'en_us' }}">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Page title -->
+    <title>{% block title %}memlink.to{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    {% bootstrap_css %}
+
+    <!-- Bootstrap JavaScript if it is in head -->
+    {% if 'javascript_in_head'|bootstrap_setting %}
+        {% bootstrap_javascript %}
+    {% endif %}
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+
+<body>
+
+<div class="container py-3">
+    <header>
+        <nav class="navbar navbar-expand-lg bg-light">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">memlink.to</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {%  if user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Create</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">My Links</a>
+                </li>
+                {% endif %}
+              </ul>
+              <div class="d-flex">
+                  {%  if user.is_authenticated %}
+                    Hi, {{ user }}! &nbsp; <a href="{% url 'account_logout' %}">Sign out</a>
+                  {% else %}
+                    <a href="{% url 'account_login' %}">Sign in</a> &nbsp; or &nbsp; <a href="{% url 'account_signup' %}">Sign up</a>
+                  {% endif %}
+              </div>
+            </div>
+          </div>
+        </nav>
+    </header>
+
+    {% block before_content %}{% endblock %}
+    {% block content %} CONTENT {% endblock %}
+    {% block after_content %}{% endblock %}
+
+    <!-- Bootstrap JavaScript if it is in body -->
+    {% if not 'javascript_in_head'|bootstrap_setting %}
+        {% bootstrap_javascript %}
+    {% endif %}
+
+    {% block extra_script %}{% endblock %}
+
+</body>
+
+</html>
