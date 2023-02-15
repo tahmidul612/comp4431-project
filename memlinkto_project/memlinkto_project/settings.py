@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
+    'modernrpc',
+
 ]
 
 MIDDLEWARE = [
@@ -142,3 +145,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "/"
+
+MODERNRPC_METHODS_MODULES = [
+    'memlinkto_app.rpc'
+]
