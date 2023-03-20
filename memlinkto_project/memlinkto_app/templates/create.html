@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}memlink.to{% endblock %}
+{% block active_anchor_id %}anchorCreate{% endblock %}
+
+{% block content %}
+    <div class="input-group mb-3">
+      <span class="input-group-text">URL</span>
+      <input id="inputLongUrl" type="text" class="form-control" placeholder="your long URL" aria-label="Long URL" aria-describedby="basic-addon"/>
+      <div id="divSpinner" class="spinner-border m-2 invisible" role="status" style="border-radius: 60%">
+          <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <h1 class="display-6 text-center"><a id="anchorShortUrl"></a></h1>
+
+{% endblock %}
+
+{% block extra_script %}
+    <script src="{% static 'memlinkto_app/create.js' %}"></script>
+{% endblock %}

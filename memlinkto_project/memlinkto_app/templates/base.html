@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load django_bootstrap5 %}
 {% load i18n %}
+{% load static %}
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE|default:'en_us' }}">
 
@@ -28,9 +29,9 @@
 <body>
 
 <div class="container py-3">
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-md bg-light border rounded-3">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">memlink.to</a>
+            <a class="navbar-brand" href="/">memlink.to</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
                     aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -39,10 +40,10 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Create</a>
+                            <a id="anchorCreate" class="nav-link" aria-current="page" href="/create">Create</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">My Links</a>
+                            <a id="anchorLinks" class="nav-link" href="/links">My Links</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -57,17 +58,21 @@
             </div>
         </div>
     </nav>
-
-    {% block before_content %}{% endblock %}
-    {% block content %} CONTENT {% endblock %}
-    {% block after_content %}{% endblock %}
-
+    <div class="container-fluid mt-3">
+        {% block before_content %}{% endblock %}
+        {% block content %} CONTENT {% endblock %}
+        {% block after_content %}{% endblock %}
+    </div>
     <!-- Bootstrap JavaScript if it is in body -->
     {% if not 'javascript_in_head'|bootstrap_setting %}
         {% bootstrap_javascript %}
     {% endif %}
 
     {% block extra_script %}{% endblock %}
+
+    <script>
+        document.querySelector("#{% block active_anchor_id %}anchorCreate{% endblock %}").classList.add("active");
+    </script>
 
 </body>
 

@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
-
 {% block title %}memlink.to{% endblock %}
 
 {% block content %}
-    This is <em>bootstrap5</em> for <strong>Django</strong>.
+    <div class="h-100 p-5 bg-light border rounded-3">
+        <h2>Welcome to memlink.to</h2>
+        <p>Our service is designed to make your online experience faster, simpler, and more efficient. With our intelligent algorithm, you can easily create short and memorable URLs for all your links.</p>
+        <p>Whether you're sharing content on social media, sending links to friends and family, or promoting your business, our URL shortener is the perfect tool to help you get your message across. Plus, with our advanced analytics features, you can track clicks and engagement, and optimize your marketing campaigns for maximum impact.</p>
+        <p>Our service is also incredibly easy to use. Just paste in your long URL, and our machine learning model will generate a short, custom URL for you in seconds. You can even personalize your URLs to make them more relevant and memorable.</p>
+        <p> So what are you waiting for? Sign up for our URL shortening service today and take advantage of the power of machine learning to streamline your online presence!</p>
+        <a class="btn btn-outline-secondary" href="{% url 'account_signup' %}">Sign Up</a> or <a class="btn btn-outline-secondary" href="{% url 'account_login' %}">Sign In</a>
+    </div>
 {% endblock %}

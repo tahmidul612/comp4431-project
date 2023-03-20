@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}memlink.to{% endblock %}
+{% block active_anchor_id %}anchorLinks{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+{% endblock %}
+{% block content %}
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Short URL</th>
+            <th>Long URL</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for url_mapping in url_mappings %}
+            <tr id="tr_{{ url_mapping.short_url }}">
+                <td>{{ url_mapping.short_url }}</td>
+                <td>{{ url_mapping.long_url }}</td>
+                <td>
+                    <button type="button" class="btn btn-default">
+                        <span class="bi bi-trash" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
