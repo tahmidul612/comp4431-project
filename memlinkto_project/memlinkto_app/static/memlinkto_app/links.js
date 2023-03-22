@@ -26,7 +26,10 @@ function deleteFromServer(evt) {
 }
 
 function deleteFromTable(evt) {
-    let tr = evt.target.parentNode.parentNode.parentNode;
+    let tr = evt.target.parentNode.parentNode;
+    if (tr.nodeName !== 'TR') {
+        tr = tr.parentNode;
+    }
     let tbody = tr.parentNode;
     tbody.removeChild(tr);
 }
