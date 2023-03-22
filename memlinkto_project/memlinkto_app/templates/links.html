@@ -8,7 +8,7 @@
 {% endblock %}
 {% block content %}
 
-    <table class="table table-striped">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th>Short URL</th>
@@ -18,11 +18,11 @@
         </thead>
         <tbody>
         {% for url_mapping in url_mappings %}
-            <tr id="tr_{{ url_mapping.short_url }}">
+            <tr>
                 <td>{{ url_mapping.short_url }}</td>
                 <td>{{ url_mapping.long_url }}</td>
                 <td>
-                    <button type="button" class="btn btn-default">
+                    <button id="btn_{{ url_mapping.short_url }}" type="button" class="btn btn-default btn-delete">
                         <span class="bi bi-trash" aria-hidden="true"></span>
                     </button>
                 </td>
@@ -31,4 +31,8 @@
         </tbody>
     </table>
 
+{% endblock %}
+
+{% block extra_script %}
+    <script src="{% static 'memlinkto_app/links.js' %}"></script>
 {% endblock %}

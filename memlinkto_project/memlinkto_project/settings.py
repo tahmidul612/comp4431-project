@@ -144,6 +144,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "/"
+ACCOUNT_LOGOUT_ON_GET = True
 
 MODERNRPC_METHODS_MODULES = [
     'memlinkto_app.rpc'

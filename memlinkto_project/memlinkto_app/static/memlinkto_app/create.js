@@ -1,23 +1,71 @@
 //setup before functions
 let typingTimer;                //timer identifier
-let doneTypingInterval = 5_000;  //time in ms, 5 seconds for example
+let doneTypingInterval = 2_000;  //time in ms, 2 seconds for example
 let inputLongUrl = document.querySelector('#inputLongUrl');
+let lastValue = "";
 
 //on keyup, start the countdown
 inputLongUrl.addEventListener('keyup', function () {
-    let divSpinner = document.querySelector('#divSpinner');
-    divSpinner.classList.remove("invisible");
     clearTimeout(typingTimer);
-    typingTimer = setTimeout(doneTyping, doneTypingInterval);
+    if (inputLongUrl.value && lastValue != inputLongUrl.value) {
+        showSpinner();
+        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+    }
 });
 
 //on keydown, clear the countdown
 inputLongUrl.addEventListener('keydown', function () {
+    hideWarning();
+    hideSuccess();
     clearTimeout(typingTimer);
 });
 
+function isValidUrl(string) {
+    try {
+        new URL(string);
+        return true;
+    } catch (err) {
+        return false;
+    }
+}
+
+function showWarning() {
+    document.querySelector("#divWarning").classList.remove("d-none");
+    hideSuccess();
+}
+
+function hideWarning() {
+    document.querySelector("#divWarning").classList.add("d-none");
+}
+
+function showSuccess() {
+    document.querySelector("#divSuccess").classList.remove("d-none");
+    hideWarning();
+}
+
+function hideSuccess() {
+    document.querySelector("#divSuccess").classList.add("d-none");
+}
+
+function showSpinner() {
+    document.querySelector('#divSpinner').classList.remove("invisible");
+}
+
+function hideSpinner() {
+    document.querySelector('#divSpinner').classList.add("invisible");
+}
+
 //user is "finished typing," do something
 function doneTyping() {
+
+    if (!isValidUrl(inputLongUrl.value)) {
+        showWarning();
+        hideSpinner();
+        return;
+    }
+
+    lastValue = inputLongUrl.value;
+
     // Send a backend request
     fetch('/rpc/', {
         method: 'POST',
@@ -35,7 +83,7 @@ function doneTyping() {
         let anchorShortUrl = document.querySelector('#anchorShortUrl');
         anchorShortUrl.setAttribute("href", json.result);
         anchorShortUrl.innerHTML = json.result;
-        let divSpinner = document.querySelector('#divSpinner');
-        divSpinner.classList.add("invisible");
-    })
+        hideSpinner();
+        showSuccess();
+    });
 }
