@@ -83,6 +83,8 @@ function doneTyping() {
         let anchorShortUrl = document.querySelector('#anchorShortUrl');
         anchorShortUrl.setAttribute("href", json.result);
         anchorShortUrl.innerHTML = json.result;
+        let divLongUrl = document.querySelector('#divLongUrl');
+        divLongUrl.innerHTML = lastValue;
         hideSpinner();
         showSuccess();
     });

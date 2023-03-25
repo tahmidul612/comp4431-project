@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -47,6 +46,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     'modernrpc',
+    'hcaptcha',
 
 ]
 
@@ -101,7 +101,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -120,7 +119,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -131,7 +129,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -149,3 +146,13 @@ ACCOUNT_LOGOUT_ON_GET = True
 MODERNRPC_METHODS_MODULES = [
     'memlinkto_app.rpc'
 ]
+
+HCAPTCHA_SITEKEY = 'c0970832-4af8-4abd-82f3-8d22e0bcb5c8'
+HCAPTCHA_SECRET = '0xD5D037E5bB9E0138a8DEB6746EFa3eab9fe76382'
+
+ACCOUNT_FORMS = {
+    'signup': 'memlinkto_app.forms.CustomSignupForm',
+    'reset_password': 'memlinkto_app.forms.CustomForgetPassword',
+}
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
