@@ -96,8 +96,12 @@ WSGI_APPLICATION = 'memlinkto_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'memlinkto',
+        'USER': 'postgres',
+        'PASSWORD': 'qCS%909*xt2*qB',
+        'HOST': 'pgdb-memlinkto.csw2hcosxuln.us-west-2.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -150,9 +154,9 @@ MODERNRPC_METHODS_MODULES = [
 HCAPTCHA_SITEKEY = 'c0970832-4af8-4abd-82f3-8d22e0bcb5c8'
 HCAPTCHA_SECRET = '0xD5D037E5bB9E0138a8DEB6746EFa3eab9fe76382'
 
-ACCOUNT_FORMS = {
-    'signup': 'memlinkto_app.forms.CustomSignupForm',
-    'reset_password': 'memlinkto_app.forms.CustomForgetPassword',
-}
+# ACCOUNT_FORMS = {
+#     'signup': 'memlinkto_app.forms.CustomSignupForm',
+#     'reset_password': 'memlinkto_app.forms.CustomForgetPassword',
+# }
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
