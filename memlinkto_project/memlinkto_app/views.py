@@ -1,7 +1,8 @@
 from allauth.account.models import EmailAddress
 from django.http import HttpResponse
 from django.template import loader
-
+from django.shortcuts import redirect
+from django.views.defaults import page_not_found
 from memlinkto_app.models import UrlMapping
 
 def index(request):
@@ -27,3 +28,9 @@ def links(request):
         entry = {"short_url": url_mapping.short_url, "long_url": url_mapping.long_url}
         result.append(entry)
     return HttpResponse(template.render({"url_mappings": result}, request))
+
+def redirect_or_404(request, exception):
+    url_mappings = UrlMapping.objects.filter(short_url=request.build_absolute_uri())
+    if len(url_mappings) > 0:
+        return redirect(url_mappings[0].long_url)
+    return page_not_found()

@@ -17,9 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from modernrpc.views import RPCEntryPoint
 
+import memlinkto_app.views
+
 urlpatterns = [
     path('', include('memlinkto_app.urls')),
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
     path('rpc/', RPCEntryPoint.as_view(enable_doc=True)),
 ]
+
+handler404 = "memlinkto_app.views.redirect_or_404"
