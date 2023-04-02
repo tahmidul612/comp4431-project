@@ -13,6 +13,10 @@ def create_link(long_url: str, **kwargs):
     if len(url_mappings) > 0:
         return url_mappings[0].short_url
     # generate a new short url if it is a new long url for the given user.
+
+    # get the content from the page
+    # get the slug from the content
+
     short_url = "https://memlink.to/" + uuid.uuid4().hex.upper()[0:6]
     url_mapping = UrlMapping(email_address=email_address, short_url=short_url, long_url=long_url)
     url_mapping.save()
