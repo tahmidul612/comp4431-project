@@ -32,9 +32,7 @@ def links(request):
 
 
 def navigate(request, exception):
-    short_url = request.build_absolute_uri()
-    if "http://localhost:8000/" in short_url:
-        short_url = short_url.replace("http://localhost:8000/", "https://memlink.to/")
+    short_url = "https://memlink.to" + request.path
     url_mappings = UrlMapping.objects.filter(short_url=short_url)
     if len(url_mappings) > 0:
         return redirect(url_mappings[0].long_url)
