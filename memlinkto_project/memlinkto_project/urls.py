@@ -24,3 +24,4 @@ urlpatterns = [
     path('rpc/', RPCEntryPoint.as_view(enable_doc=True)),
 ]
 
+handler404 = 'memlinkto_app.views.navigate'

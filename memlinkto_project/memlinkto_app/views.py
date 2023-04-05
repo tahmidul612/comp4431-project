@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.views.defaults import page_not_found
 from memlinkto_app.models import UrlMapping
 
+
 def index(request):
     template_file = 'index.html'
     if request.user.is_authenticated:
@@ -28,9 +29,13 @@ def links(request):
         entry = {"short_url": url_mapping.short_url, "long_url": url_mapping.long_url}
         result.append(entry)
     return HttpResponse(template.render({"url_mappings": result}, request))
-#
-# def redirect_or_404(request, exception):
-#     url_mappings = UrlMapping.objects.filter(short_url=request.build_absolute_uri())
-#     if len(url_mappings) > 0:
-#         return redirect(url_mappings[0].long_url)
-#     return page_not_found()
+
+
+def navigate(request, exception):
+    short_url = request.build_absolute_uri()
+    if "http://localhost:8000/" in short_url:
+        short_url = short_url.replace("http://localhost:8000/", "https://memlink.to/")
+    url_mappings = UrlMapping.objects.filter(short_url=short_url)
+    if len(url_mappings) > 0:
+        return redirect(url_mappings[0].long_url)
+    return index(request)
