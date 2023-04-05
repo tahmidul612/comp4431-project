@@ -154,10 +154,10 @@ MODERNRPC_METHODS_MODULES = [
 HCAPTCHA_SITEKEY = 'c0970832-4af8-4abd-82f3-8d22e0bcb5c8'
 HCAPTCHA_SECRET = '0xD5D037E5bB9E0138a8DEB6746EFa3eab9fe76382'
 
-# ACCOUNT_FORMS = {
-#     'signup': 'memlinkto_app.forms.CustomSignupForm',
-#     'reset_password': 'memlinkto_app.forms.CustomForgetPassword',
-# }
+ACCOUNT_FORMS = {
+    'signup': 'memlinkto_app.forms.CustomSignupForm',
+    'reset_password': 'memlinkto_app.forms.CustomForgetPassword',
+}
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
