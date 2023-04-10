@@ -15,10 +15,9 @@ def create_link(long_url: str, **kwargs):
         email_address=email_address, long_url=long_url)
     if len(url_mappings) > 0:
         return url_mappings[0].short_url
-    slug = ''
     try:
-        response = requests.post("127.0.0.1:8080/slug", data={
-            "long_url": long_url}, headers={'Content-Type': 'application/json'})
+        response = requests.post("http://127.0.0.1:8080/slug", json={
+            "url": long_url}, headers={'Content-Type': 'application/json'})
     except requests.exceptions.RequestException as e:
         slug = uuid.uuid4().hex.upper()[0:6]
     else:
