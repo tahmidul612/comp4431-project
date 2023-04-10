@@ -34,6 +34,11 @@ function showWarning() {
   hideSuccess();
 }
 
+function showUnsafeWarning() {
+  document.querySelector("#divUnsafeWarning").classList.remove("d-none");
+  hideSuccess();
+}
+
 function hideWarning() {
   document.querySelector("#divWarning").classList.add("d-none");
 }
@@ -77,7 +82,7 @@ function doneTyping() {
     }
   }).then(res => res.json()).then(json => {
     if (json.result != "safe") {
-      showWarning();
+      showUnsafeWarning();
       hideSpinner();
       return;
     }
