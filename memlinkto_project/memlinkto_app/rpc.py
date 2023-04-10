@@ -16,7 +16,7 @@ def create_link(long_url: str, **kwargs):
     if len(url_mappings) > 0:
         return url_mappings[0].short_url
     try:
-        response = requests.post("http://127.0.0.1:8080/slug", json={
+        response = requests.post("http://ec2-35-84-2-187.us-west-2.compute.amazonaws.com:8080/slug", json={
             "url": long_url}, headers={'Content-Type': 'application/json'})
     except requests.exceptions.RequestException as e:
         slug = uuid.uuid4().hex.upper()[0:6]
